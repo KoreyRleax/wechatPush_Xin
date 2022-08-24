@@ -12,19 +12,19 @@ import java.util.Calendar;
 public class JiNianRiUtils {
 
     public static int getLianAi(){
-        return calculationLianAi("2021-11-06");
+        return calculationLianAi("2021-6-22");
     }
-    public static int getBirthday_Jo(){
+    public static int getBirthday_Xin(){
         try {
-            return calculationBirthday("2001-11-16");
+            return calculationBirthday("2003-03-05");
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return 0;
     }
-    public static int getBirthday_Hui(){
+    public static int getBirthday_Me(){
         try {
-            return calculationBirthday("2000-09-11");
+            return calculationBirthday("2003-03-22");
         } catch (ParseException e) {
             e.printStackTrace();
         }

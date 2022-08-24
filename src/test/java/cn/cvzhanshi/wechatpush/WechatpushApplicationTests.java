@@ -8,6 +8,8 @@ class WechatpushApplicationTests {
 
     @Test
     void contextLoads() {
+        WechatpushApplication application = new WechatpushApplication();
+        application.goodMorning();
     }
 
 }
