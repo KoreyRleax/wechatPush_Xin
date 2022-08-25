@@ -11,12 +11,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class WechatpushApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WechatpushApplication.class, args);
+//        SpringApplication.run(WechatpushApplication.class, args);
+        goodMorning();
     }
 
 
-    @Scheduled(cron = "0 05 10 * * ?")
-    public void goodMorning(){
+    //    @Scheduled(cron = "0 05 10 * * ?")
+    public static void goodMorning() {
         Pusher.push();
     }
 
