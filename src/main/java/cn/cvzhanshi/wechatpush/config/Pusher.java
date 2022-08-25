@@ -33,7 +33,7 @@ public class Pusher {
         wxMpService.setWxMpConfigStorage(wxStorage);
         //2,推送消息
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                .toUser("oIJBI6xTz1UKKgVPioHDsCaCXWQA")
+//                .toUser("oIJBI6xTz1UKKgVPioHDsCaCXWQA")
                 .toUser("oIJBI6wUxgMa5JMYE5DQa4PNPkVk")
                 .templateId("H3rZKrB6fBRbs5xW6Hl3O5ZoBdHI69SQlVwkFWFkQi8")
                 .build();
@@ -69,8 +69,10 @@ public class Pusher {
         int highTemp= Integer.parseInt(weather.getHigh());
         int lowTemp= Integer.parseInt(weather.getLow());
         if (highTemp>=34){
-            tips = "今天天气炎热，出门记得防晒哦！";
+            tips = "今天天气炎热，最高温度达到了"+highTemp+"℃，出门记得防晒哦！";
         }else if (lowTemp<=20){
+            tips = "今天外面可冷，别冻着了！最低温度达到了"+lowTemp+"℃";
+        }else{
             tips = "今天很凉爽，我带你出门兜风吧！";
         }
         templateMessage.addData(new WxMpTemplateData("tips",tips,"#FF69B4"));
