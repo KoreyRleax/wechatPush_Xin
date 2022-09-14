@@ -25,35 +25,36 @@ public class Pusher {
 
 
     public static void push(){
-        //1，配置
+        //配置
         WxMpInMemoryConfigStorage wxStorage = new WxMpInMemoryConfigStorage();
         wxStorage.setAppId(appId);
         wxStorage.setSecret(secret);
         WxMpService wxMpService = new WxMpServiceImpl();
         wxMpService.setWxMpConfigStorage(wxStorage);
-        //2,推送消息
+        //推送消息
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
 //                .toUser("oIJBI6xTz1UKKgVPioHDsCaCXWQA")
                 .toUser("oIJBI6wUxgMa5JMYE5DQa4PNPkVk")
-                .templateId("H3rZKrB6fBRbs5xW6Hl3O5ZoBdHI69SQlVwkFWFkQi8")
+                .templateId("wpSEwmDrtWCsHIIgMhhISAq2EmQ31zqGiTi8JoOj5EI")
                 .build();
-        //3,如果是正式版发送模版消息，这里需要配置你的信息
         Weather weather = WeatherUtils.getWeather();
+        ValueToStringFilter filter = new ValueToStringFilter();
         Map<String, String> map = CaiHongPiUtils.getEnsentence();
-        templateMessage.addData(new WxMpTemplateData("riqi",weather.getDate() + "  "+ weather.getWeek(),"#00BFFF"));
-        templateMessage.addData(new WxMpTemplateData("tianqi",weather.getText_now(),"#00FFFF"));
-        templateMessage.addData(new WxMpTemplateData("low",weather.getLow() + "","#173177"));
-        templateMessage.addData(new WxMpTemplateData("temp",weather.getTemp() + "","#EE212D"));
-        templateMessage.addData(new WxMpTemplateData("high",weather.getHigh()+ "","#FF6347" ));
-        templateMessage.addData(new WxMpTemplateData("windclass",weather.getWind_class()+ "","#42B857" ));
-        templateMessage.addData(new WxMpTemplateData("winddir",weather.getWind_dir()+ "","#B95EA3" ));
-        templateMessage.addData(new WxMpTemplateData("caihongpi",CaiHongPiUtils.getCaiHongPi(),"#FF69B4"));
-        templateMessage.addData(new WxMpTemplateData("lianai",JiNianRiUtils.getLianAi()+"","#FF1493"));
-        templateMessage.addData(new WxMpTemplateData("shengri1",JiNianRiUtils.getBirthday_Xin()+"","#FFA500"));
-        templateMessage.addData(new WxMpTemplateData("shengri2",JiNianRiUtils.getBirthday_Me()+"","#FFA500"));
-        templateMessage.addData(new WxMpTemplateData("en",map.get("en") +"","#C71585"));
-        templateMessage.addData(new WxMpTemplateData("zh",map.get("zh") +"","#C71585"));
-        String beizhu = "欣欣子早上好啊！";
+        templateMessage.addData(new WxMpTemplateData("date", filter.date,"#00BFFF"));
+        templateMessage.addData(new WxMpTemplateData("weather", filter.tianqi,"#00FFFF"));
+        templateMessage.addData(new WxMpTemplateData("low", filter.low + "","#FF6347"));
+        templateMessage.addData(new WxMpTemplateData("high", filter.high+ "","#FF6347" ));
+        templateMessage.addData(new WxMpTemplateData("temp", filter.temp+ "","#EE212D"));
+        templateMessage.addData(new WxMpTemplateData("windClass", filter.wind_class+ "","#42B857" ));
+        templateMessage.addData(new WxMpTemplateData("windDir", filter.wind_dir+ "","#B95EA3" ));
+        templateMessage.addData(new WxMpTemplateData("caiHongPi", filter.caiHongPi,"#FF69B4"));
+        templateMessage.addData(new WxMpTemplateData("lianAi", filter.lianAi+"","#FF1493"));
+        templateMessage.addData(new WxMpTemplateData("birthday_xin", filter.birthday_xin+"","#FFA500"));
+        templateMessage.addData(new WxMpTemplateData("birthday_me", filter.birthday_me+"","#FFA500"));
+        templateMessage.addData(new WxMpTemplateData("city", filter.city+"","#FFA500"));
+        templateMessage.addData(new WxMpTemplateData("endWords", filter.endWords +"","#C71585"));
+        templateMessage.addData(new WxMpTemplateData("myWord", filter.myWord +"","#FF69B4"));
+        String beizhu = "Dear 欣欣";
         if(JiNianRiUtils.getLianAi() % 365 == 0){
             beizhu = "今天是相识" + (JiNianRiUtils.getLianAi() / 365) + "周年纪念日！";
         }
